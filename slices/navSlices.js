@@ -9,11 +9,11 @@ const initialState = {
 export const navSlice = createSlice({
   name: "nav",
   initialState,
-  reducer: {
+  reducers: {
     setOrigin: (state, action) => {
       state.origin = action.payload;
     },
-    setdestination: (state, action) => {
+    setDestination: (state, action) => {
       state.destination = action.payload;
     },
     setTravelTimeInformation: (state, action) => {
@@ -23,7 +23,7 @@ export const navSlice = createSlice({
 });
 
 //this is called distructuring, letting the rest of the app know about the actions
-export const { setOrigin, setdestination, setTravelTimeInformation } =
+export const { setOrigin, setDestination, setTravelTimeInformation } =
   navSlice.actions;
 
 //HAVE SOME SELECTORS, to grab data
