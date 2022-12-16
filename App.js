@@ -1,16 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
-// Setup Redux
+import HomeScreen from "./screens/HomeScreen";
+import { store } from "./store";
 
+// Setup Redux
 export default function App() {
   return (
-    <Provider store={}>
+    <Provider store={store}>
       <View style={styles.container}>
-        <Text>Fetan app!</Text>
+        <HomeScreen />
       </View>
     </Provider>
-  ); 
+  );
 }
 
 const styles = StyleSheet.create({
