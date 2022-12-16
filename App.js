@@ -8,7 +8,7 @@ import { store } from "./store";
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
+      <View>
         <HomeScreen />
       </View>
     </Provider>
