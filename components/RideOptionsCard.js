@@ -52,7 +52,7 @@ const RideOptionsCard = () => {
         </TouchableOpacity>
         <Text style={tw`text-center py-5 text-xl`}>
           {" "}
-          Select Ride - {travelTimeInformation?.distance.text}{" "}
+          Select Ride - {travelTimeInformation?.distance?.text}{" "}
         </Text>
       </View>
       <FlatList
