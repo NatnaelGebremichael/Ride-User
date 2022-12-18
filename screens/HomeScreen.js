@@ -12,6 +12,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={[tw`bg-white h-full`]}>
+      {/*Uber logo*/}
       <View style={tw`p-5`}>
         <Image
           style={{ width: 100, height: 100, resizeMode: "contain" }}
@@ -19,6 +20,7 @@ const HomeScreen = () => {
             uri: "https://links.papareact.com/gzs",
           }}
         />
+        {/*Map Search Bar*/}
         <GooglePlacesAutocomplete
           styles={{
             container: {
@@ -48,7 +50,7 @@ const HomeScreen = () => {
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={400} //will execute search after 400ms
         />
-
+        {/*Navigation drive/eats*/}
         <NavOptions />
       </View>
     </SafeAreaView>
