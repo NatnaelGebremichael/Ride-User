@@ -34,7 +34,7 @@ const HomeScreen = () => {
             dispatch(
               setOrigin({
                 location: details.geometry.location,
-                desccription: data.desccription,
+                description: data.description,
               })
             );
             dispatch(setDestination(null));

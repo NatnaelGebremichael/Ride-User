@@ -12,19 +12,19 @@ const MapScreen = () => {
   return (
     <View>
       <View style={tw`h-1/2`}>
-        <Map />
+        <Map /* The google map view*/ />
       </View>
       <View style={tw`h-1/2`}>
         <Stack.Navigator>
           <Stack.Screen
-            name="Navigatorcard"
+            name="Navigatorcard" /* This Stack let us choose destination*/
             component={NavigateCard}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="RideOptionsCard"
+            name="RideOptionsCard" /* This Stack lets us choose ride/tupe of car */
             component={RideOptionsCard}
             options={{
               headerShown: false,
