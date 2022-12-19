@@ -22,6 +22,7 @@ import { Icon } from "react-native-elements";
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const destination = useSelector(selectDestination);
 
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
@@ -57,15 +58,25 @@ const NavigateCard = () => {
           style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}
         >
           <TouchableOpacity
+            disabled={!destination}
             onPress={() => navigation.navigate("RideOptionsCard")}
-            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full`}
+            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${
+              !destination && "opacity-20"
+            }`}
           >
             <Icon name="car-outline" type="ionicon" color="white" size={16} />
-            <Text style={tw`text-white text-center`}>Rides</Text>
+            <Text
+              style={tw`text-white text-center ${!destination && "text-black"}`}
+            >
+              Rides
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled={!destination}
             onPress={() => navigation.navigate("RideOptionsCard")}
-            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full`}
+            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${
+              !destination && "opacity-20"
+            }`}
           >
             <Icon
               name="fast-food-outline"
@@ -73,7 +84,11 @@ const NavigateCard = () => {
               color="white"
               size={16}
             />
-            <Text style={tw`text-white text-center`}>Eats</Text>
+            <Text
+              style={tw`text-white text-center ${!destination && "text-black"}`}
+            >
+              Eats
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

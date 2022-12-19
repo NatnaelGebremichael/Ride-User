@@ -52,8 +52,10 @@ const Map = () => {
       style={tw`flex-1`}
       mapType="mutedStandard" //removes unnesscery details from map
       initialRegion={{
-        latitude: origin.location.lat,
-        longitude: origin.location.lng,
+        latitude: origin === null ? -41.31471 : origin.location.lat,
+        longitude: origin === null ? 174.78187 : origin.location.lng,
+        //latitude: origin === null ? origin.location.lat : -41.31471,
+        //longitude: origin === null ? origin.location.lng : 174.78187,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
       }}

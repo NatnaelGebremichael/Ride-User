@@ -11,7 +11,10 @@ import tw from "tailwind-react-native-classnames";
 import { Icon, Image } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
-import { selectTravelTimeInformation } from "../slices/navSlices";
+import {
+  selectDestination,
+  selectTravelTimeInformation,
+} from "../slices/navSlices";
 
 const data = [
   {
@@ -39,6 +42,7 @@ const Surge_Charge_Rate = 1.5;
 const RideOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const destination = useSelector(selectDestination);
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
@@ -47,11 +51,11 @@ const RideOptionsCard = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate("NavigateCard")}
           style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}
+          disabled={!destination}
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
         <Text style={tw`text-center py-5 text-xl`}>
-          {" "}
           Select Ride - {travelTimeInformation?.distance?.text}{" "}
         </Text>
       </View>
