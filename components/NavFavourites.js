@@ -16,12 +16,14 @@ const NavFavourites = () => {
       id: "123",
       icon: "home",
       location: "Home",
+      type: "iconicon",
       destination: "Code Street, London, UK",
     },
     {
       id: "124",
-      icon: "camera", //supposed to be briefcase, but not working
+      icon: "car-outline",
       location: "Work",
+      type: "ionicon",
       destination: "London Eye, London, UK",
     },
   ];
@@ -38,7 +40,7 @@ const NavFavourites = () => {
           <Icon
             style={tw`mr-4 rounded-full bg-black p-3`}
             name={item.icon}
-            type="iconicon"
+            type={item.type}
             color="white"
             size={18}
           />

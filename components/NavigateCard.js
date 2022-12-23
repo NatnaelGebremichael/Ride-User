@@ -14,6 +14,7 @@ import {
   selectDestination,
   selectOrigion,
   setDestination,
+  setOrigin,
 } from "../slices/navSlices";
 import { useNavigation } from "@react-navigation/native";
 import NavFavourites from "./NavFavourites";
@@ -28,7 +29,38 @@ const NavigateCard = () => {
     <SafeAreaView style={tw`bg-white flex-1`}>
       <Text style={tw`text-center py-5 text-xl`}>Good Morning, Nati</Text>
       <View style={tw`border-t border-gray-200 flex-shrink`}>
-        <View>
+        <View //select origin and destination
+        >
+          {/*Map Search Bar*/}
+          <GooglePlacesAutocomplete
+            styles={{
+              container: {
+                flex: 0,
+              },
+              textInput: {
+                fontSize: 18,
+              },
+            }}
+            onPress={(data, details = null) => {
+              dispatch(
+                setOrigin({
+                  location: details.geometry.location,
+                  description: data.description,
+                })
+              );
+              dispatch(setDestination(null));
+            }}
+            fetchDetails={true}
+            enablePoweredByContainer={false}
+            minLength={2}
+            query={{
+              key: GOOGLE_MAPS_APIKEY,
+              language: "en",
+            }}
+            placeholder="Where From?"
+            nearbyPlacesAPI="GooglePlacesSearch"
+            debounce={400} //will execute search after 400ms
+          />
           <GooglePlacesAutocomplete
             placeholder="Where to?"
             styles={toinputBoxStyles}
@@ -54,10 +86,10 @@ const NavigateCard = () => {
           />
         </View>
         <NavFavourites />
-        <View
+        <View //ride and eat button
           style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}
         >
-          <TouchableOpacity
+          <TouchableOpacity //Ride button
             disabled={!destination}
             onPress={() => navigation.navigate("RideOptionsCard")}
             style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${
@@ -71,7 +103,7 @@ const NavigateCard = () => {
               Rides
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <TouchableOpacity //Eats button
             disabled={!destination}
             onPress={() => navigation.navigate("RideOptionsCard")}
             style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${

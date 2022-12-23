@@ -7,13 +7,10 @@ import NavigateCard from "../components/NavigateCard";
 import RideOptionsCard from "../components/RideOptionsCard";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { selectDestination } from "../slices/navSlices";
-import { useSelector } from "react-redux";
 
 const MapScreen = () => {
   const Stack = createNativeStackNavigator(); //creating stack navigator inside another stack
   const navigation = useNavigation();
-  const destination = useSelector(selectDestination);
 
   return (
     <View>
@@ -37,7 +34,6 @@ const MapScreen = () => {
             }}
           />
           <Stack.Screen
-            disabled={!destination}
             name="RideOptionsCard" /* This Stack lets us choose ride/type of car */
             component={RideOptionsCard}
             options={{

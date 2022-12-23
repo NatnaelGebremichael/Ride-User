@@ -42,7 +42,6 @@ const Surge_Charge_Rate = 1.5;
 const RideOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
-  const destination = useSelector(selectDestination);
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
@@ -51,7 +50,6 @@ const RideOptionsCard = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate("NavigateCard")}
           style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}
-          disabled={!destination}
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
