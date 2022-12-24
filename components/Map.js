@@ -85,11 +85,6 @@ const Map = () => {
           />
         )}
 
-      {console.log(origin === null ? "origin is empty" : origin.location.lat)}
-      {console.log(
-        destination === null ? "destination is empty" : destination.location.lat
-      )}
-
       {destination?.location /**allows us to put pin on destination location */ && (
         <Marker
           coordinate={{
@@ -126,7 +121,17 @@ const Map = () => {
           identifier="catTest1"
         >
           <Image
-            style={{ width: 50, height: 50, resizeMode: "contain" }}
+            style={{
+              width: 50,
+              height: 50,
+              resizeMode: "contain",
+              transform: [
+                // allows for display of car in the direction they are going
+                {
+                  rotate: `${car.heading}90deg`,
+                },
+              ],
+            }}
             source={getCarImage(car.type)}
           />
         </Marker>

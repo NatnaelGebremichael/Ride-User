@@ -24,6 +24,7 @@ const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const destination = useSelector(selectDestination);
+  const origin = useSelector(selectOrigion);
 
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
@@ -31,16 +32,11 @@ const NavigateCard = () => {
       <View style={tw`border-t border-gray-200 flex-shrink`}>
         <View //select origin and destination
         >
-          {/*Map Search Bar*/}
-          <GooglePlacesAutocomplete
-            styles={{
-              container: {
-                flex: 0,
-              },
-              textInput: {
-                fontSize: 18,
-              },
-            }}
+          <GooglePlacesAutocomplete //select origin [default current location]
+            placeholder="Where From?"
+            nearbyPlacesAPI="GooglePlacesSearch"
+            debounce={400} //will execute search after 400ms
+            styles={inputBoxStyles}
             onPress={(data, details = null) => {
               dispatch(
                 setOrigin({
@@ -48,7 +44,6 @@ const NavigateCard = () => {
                   description: data.description,
                 })
               );
-              dispatch(setDestination(null));
             }}
             fetchDetails={true}
             enablePoweredByContainer={false}
@@ -57,13 +52,10 @@ const NavigateCard = () => {
               key: GOOGLE_MAPS_APIKEY,
               language: "en",
             }}
-            placeholder="Where From?"
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={400} //will execute search after 400ms
           />
-          <GooglePlacesAutocomplete
+          <GooglePlacesAutocomplete //select destination
             placeholder="Where to?"
-            styles={toinputBoxStyles}
+            styles={inputBoxStyles}
             fetchDetails={true}
             returnKeyType={"search"}
             minLength={2}
@@ -74,7 +66,9 @@ const NavigateCard = () => {
                   description: data.description,
                 })
               );
-              navigation.navigate("RideOptionsCard");
+              {
+                origin != null ? navigation.navigate("RideOptionsCard") : "";
+              }
             }}
             enablePoweredByContainer={false}
             query={{
@@ -86,7 +80,7 @@ const NavigateCard = () => {
           />
         </View>
         <NavFavourites />
-        <View //ride and eat button
+        <View //ride button
           style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}
         >
           <TouchableOpacity //Ride button
@@ -103,25 +97,6 @@ const NavigateCard = () => {
               Rides
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity //Eats button
-            disabled={!destination}
-            onPress={() => navigation.navigate("RideOptionsCard")}
-            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${
-              !destination && "opacity-20"
-            }`}
-          >
-            <Icon
-              name="fast-food-outline"
-              type="ionicon"
-              color="white"
-              size={16}
-            />
-            <Text
-              style={tw`text-white text-center ${!destination && "text-black"}`}
-            >
-              Eats
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -130,7 +105,7 @@ const NavigateCard = () => {
 
 export default NavigateCard;
 
-const toinputBoxStyles = StyleSheet.create({
+const inputBoxStyles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     paddingTop: 5,

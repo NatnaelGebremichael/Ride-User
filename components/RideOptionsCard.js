@@ -47,17 +47,19 @@ const RideOptionsCard = () => {
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <View>
-        <TouchableOpacity
+        <TouchableOpacity //back button/arrow
           onPress={() => navigation.navigate("NavigateCard")}
           style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>
+        <Text //select ride prompt
+          style={tw`text-center py-5 text-xl`}
+        >
           Select Ride - {travelTimeInformation?.distance?.text}{" "}
         </Text>
       </View>
-      <FlatList
+      <FlatList //display types of cars available
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item: { id, title, multiplier, image }, item }) => (
@@ -77,11 +79,10 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>{travelTimeInformation?.duration.text} travel Time</Text>
+              <Text>{travelTimeInformation?.duration?.text} travel Time</Text>
             </View>
             <Text style={tw`text-xl items-end `}>
-              ${" "}
-              {(travelTimeInformation?.duration.value *
+              {(travelTimeInformation?.duration?.value *
                 Surge_Charge_Rate *
                 multiplier) /
                 100}
@@ -89,7 +90,9 @@ const RideOptionsCard = () => {
           </TouchableOpacity>
         )}
       />
-      <View style={tw`mt-auto border-t border-gray-200`}>
+      <View //choose button
+        style={tw`mt-auto border-t border-gray-200`}
+      >
         <TouchableOpacity
           disabled={!selected}
           style={tw`bg-black ${!selected && "bg-gray-300"}`}
