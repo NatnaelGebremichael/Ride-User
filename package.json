@@ -9,10 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/geolocation": "^3.0.4",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.6",
     "@reduxjs/toolkit": "^1.9.1",
     "expo": "^47.0.0",
+    "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
     "intl": "^1.2.5",
     "react": "18.1.0",

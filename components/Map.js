@@ -3,10 +3,11 @@ import {
   selectOrigion,
   setTravelTimeInformation,
 } from "../slices/navSlices";
+import * as Location from "expo-location";
 import cars from "../assets/data/cars.js";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { Image } from "react-native-elements";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tw from "tailwind-react-native-classnames";
 import MapView, { Marker } from "react-native-maps";
 import { FlatList, StyleSheet, Text, View } from "react-native";
@@ -32,6 +33,7 @@ const Map = () => {
     if (!origin || !destination) return;
 
     const getTravelTime = async () => {
+      //get travelTimeInformation
       fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?
       units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
         .then((res) => res.json())
@@ -49,6 +51,7 @@ const Map = () => {
   }, [origin, destination, GOOGLE_MAPS_APIKEY]);
 
   const getCarImage = (type) => {
+    //return correct car.png
     if (type === "UberX") {
       return require("../assets/images/top-UberX.png");
     }
@@ -60,6 +63,20 @@ const Map = () => {
     }
   };
 
+  const [currentLocationLat, setCurrentLocationLat] = useState({});
+  const [currentLocationLong, setcurrentLocationLong] = useState({});
+  useEffect(() => {
+    //get current  location
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      const loc = await Location.getCurrentPositionAsync();
+      setCurrentLocationLat(loc.coords.latitude);
+      setcurrentLocationLong(loc.coords.longitude);
+    })().catch(function (error) {
+      console.log("There has been a problem: " + error.message);
+    });
+  }, []);
+
   return (
     <MapView //display map
       ref={mapRef}
@@ -68,12 +85,12 @@ const Map = () => {
       initialRegion={{
         latitude: origin === null ? 28.450627 : origin.location.lat,
         longitude: origin === null ? -16.263045 : origin.location.lng,
-        //latitude: origin === null ? origin.location.lat : -41.2888731,
-        //longitude: origin === null ? origin.location.lng : 174.76712036132812,
-        latitudeDelta: 0.0922, //original value 0.005
+        latitudeDelta: 0.0922,
         longitudeDelta: 0.0121,
       }}
     >
+      {console.log(JSON.stringify(currentLocationLat))}
+
       {origin &&
         destination && ( //display line from origin to destination
           <MapViewDirections
