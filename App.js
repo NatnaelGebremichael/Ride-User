@@ -9,6 +9,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MapScreen from "./screens/MapScreen";
 import EatsScreen from "./screens/EatsScreen";
 import tw from "tailwind-react-native-classnames";
+import { Amplify } from "aws-amplify";
+import awsconfig from "./aws-exports";
+
+Amplify.configure(awsconfig);
 
 // Setup Redux
 export default function App() {
