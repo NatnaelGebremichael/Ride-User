@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import tw from "tailwind-react-native-classnames";
 
 const EatsScreen = () => {
   return (
     <View>
-      <Text>Coming Soon</Text>
+      <Text style={tw`text-center py-20 text-xl`}>Coming Soon</Text>
     </View>
   );
 };
