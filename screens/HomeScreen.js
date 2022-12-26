@@ -6,6 +6,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination, setOrigin } from "../slices/navSlices";
+import NavFavourites from "../components/NavFavourites";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -20,38 +21,10 @@ const HomeScreen = () => {
             uri: "https://links.papareact.com/gzs",
           }}
         />
-        {/*Map Search Bar*/}
-        <GooglePlacesAutocomplete
-          styles={{
-            container: {
-              flex: 0,
-            },
-            textInput: {
-              fontSize: 18,
-            },
-          }}
-          onPress={(data, details = null) => {
-            dispatch(
-              setOrigin({
-                location: details.geometry.location,
-                desccription: data.desccription,
-              })
-            );
-            dispatch(setDestination(null));
-          }}
-          fetchDetails={true}
-          enablePoweredByContainer={false}
-          minLength={2}
-          query={{
-            key: GOOGLE_MAPS_APIKEY,
-            language: "en",
-          }}
-          placeholder="Where From?"
-          nearbyPlacesAPI="GooglePlacesSearch"
-          debounce={400} //will execute search after 400ms
-        />
+
         {/*Navigation drive/eats*/}
         <NavOptions />
+        <NavFavourites />
       </View>
     </SafeAreaView>
   );
