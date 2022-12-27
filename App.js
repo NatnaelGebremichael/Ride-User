@@ -11,11 +11,13 @@ import EatsScreen from "./screens/EatsScreen";
 import tw from "tailwind-react-native-classnames";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
+import { withAuthenticator } from "aws-amplify-react-native";
 
 Amplify.configure(awsconfig);
 
 // Setup Redux
-export default function App() {
+function App() {
+  //export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
@@ -57,3 +59,5 @@ export default function App() {
     </Provider>
   );
 }
+
+export default withAuthenticator(App);

@@ -10,6 +10,11 @@
       "StackName": "amplify-fetan-dev-112303",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:727510948194:stack/amplify-fetan-dev-112303/da5ce7b0-856b-11ed-a4d2-024c8d72058e",
       "AmplifyAppId": "dyc87djrgcpew"
+    },
+    "categories": {
+      "auth": {
+        "fetan9b6703219b670321": {}
+      }
     }
   }
 }
