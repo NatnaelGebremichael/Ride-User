@@ -37,3 +37,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#google
+google-services.json
+GoogleService-info.plist
