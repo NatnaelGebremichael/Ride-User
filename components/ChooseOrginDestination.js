@@ -5,22 +5,21 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
-import tw from "tailwind-react-native-classnames";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_MAPS_APIKEY } from "@env";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectDestination,
   selectOrigion,
   setDestination,
   setOrigin,
 } from "../slices/navSlices";
+import tw from "twrnc";
+import React from "react";
+import Constants from "expo-constants";
+import { Icon } from "@rneui/themed";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import NavFavourites from "./NavFavourites";
-import { Icon } from "react-native-elements";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const NavigateCard = () => {
+const ChooseOrginDestination = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const destination = useSelector(selectDestination);
@@ -49,7 +48,7 @@ const NavigateCard = () => {
             enablePoweredByContainer={false}
             minLength={2}
             query={{
-              key: GOOGLE_MAPS_APIKEY,
+              key: Constants.manifest.extra.googleMapsApikey,
               language: "en",
             }}
           />
@@ -67,26 +66,25 @@ const NavigateCard = () => {
                 })
               );
               {
-                origin != null ? navigation.navigate("RideOptionsCard") : "";
+                origin != null ? navigation.navigate("RideOptions") : "";
               }
             }}
             enablePoweredByContainer={false}
             query={{
-              key: GOOGLE_MAPS_APIKEY,
+              key: Constants.manifest.extra.googleMapsApikey,
               language: "en",
             }}
             nearbyPlacesAPI="GoogleplacesSearch"
             debounce={400}
           />
         </View>
-        <NavFavourites />
         <View //ride button
-          style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}
+          style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100 pt-30`}
         >
           <TouchableOpacity //Ride button
             disabled={!destination}
-            onPress={() => navigation.navigate("RideOptionsCard")}
-            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full ${
+            onPress={() => navigation.navigate("RideOptions")}
+            style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full   ${
               !destination && "opacity-20"
             }`}
           >
@@ -103,7 +101,7 @@ const NavigateCard = () => {
   );
 };
 
-export default NavigateCard;
+export default ChooseOrginDestination;
 
 const inputBoxStyles = StyleSheet.create({
   container: {

@@ -1,3 +1,2 @@
-# Fetan
-
-Ride service app
+# ChatApp
+ChatApp- Built using react-native, Firebase auth/database

@@ -6,15 +6,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
-import tw from "tailwind-react-native-classnames";
-import { Icon, Image } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
 import {
   selectDestination,
   selectTravelTimeInformation,
 } from "../slices/navSlices";
+import tw from "twrnc";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Icon, Image } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 const data = [
   {
@@ -39,7 +39,7 @@ const data = [
 
 const Surge_Charge_Rate = 1.5;
 
-const RideOptionsCard = () => {
+const RideOptions = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
@@ -48,7 +48,7 @@ const RideOptionsCard = () => {
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <View>
         <TouchableOpacity //back button/arrow
-          onPress={() => navigation.navigate("NavigateCard")}
+          onPress={() => navigation.navigate("ChooseOrginDestination")}
           style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}
         >
           <Icon name="chevron-left" type="fontawesome" />
@@ -106,6 +106,6 @@ const RideOptionsCard = () => {
   );
 };
 
-export default RideOptionsCard;
+export default RideOptions;
 
 const styles = StyleSheet.create({});

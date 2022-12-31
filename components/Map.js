@@ -3,15 +3,15 @@ import {
   selectOrigion,
   setTravelTimeInformation,
 } from "../slices/navSlices";
+import tw from "twrnc";
+import { Image } from "@rneui/themed";
+import Constants from "expo-constants";
 import * as Location from "expo-location";
 import cars from "../assets/data/cars.js";
-import { GOOGLE_MAPS_APIKEY } from "@env";
-import { Image } from "react-native-elements";
-import React, { useEffect, useRef, useState } from "react";
-import tw from "tailwind-react-native-classnames";
+import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
 import MapViewDirections from "react-native-maps-directions";
 
 const Map = () => {
@@ -35,7 +35,7 @@ const Map = () => {
     const getTravelTime = async () => {
       //get travelTimeInformation
       fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?
-      units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
+      units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${Constants.manifest.extra.googleMapsApikey}`)
         .then((res) => res.json())
         .then((data) => {
           dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
@@ -48,7 +48,7 @@ const Map = () => {
         });
     };
     getTravelTime();
-  }, [origin, destination, GOOGLE_MAPS_APIKEY]);
+  }, [origin, destination, Constants.manifest.extra.googleMapsApikey]);
 
   const getCarImage = (type) => {
     //return correct car.png
@@ -96,7 +96,7 @@ const Map = () => {
           <MapViewDirections
             origin={origin.description}
             destination={destination.description}
-            apikey={GOOGLE_MAPS_APIKEY}
+            apikey={Constants.manifest.extra.googleMapsApikey}
             strokeWidth={3}
             strokeColor="black"
           />
