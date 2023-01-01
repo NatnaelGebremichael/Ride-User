@@ -13,5 +13,5 @@ web-build/
 # macOS
 .DS_Store
 
-#google cloud stuff
+#env
 .env

@@ -1,7 +1,7 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
-import tw from "tailwind-react-native-classnames";
+import tw from "twrnc";
 import React from "react";
-import { Icon } from "react-native-elements";
+import { Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { selectOrigion } from "../slices/navSlices";
@@ -11,7 +11,7 @@ const data = [
     id: "123",
     title: "Get a ride",
     image: "https://links.papareact.com/3pn",
-    screen: "MapScreen",
+    screen: "RideScreen",
   },
   {
     id: "456",
@@ -21,9 +21,8 @@ const data = [
   },
 ];
 
-const NavOptions = () => {
+const RideOrFoodNav = () => {
   const navigation = useNavigation();
-  const origin = useSelector(selectOrigion);
   return (
     <FlatList
       data={data}
@@ -46,8 +45,8 @@ const NavOptions = () => {
             <Icon
               style={tw`p-2 bg-black rounded-full w-10 mt-4`}
               name="arrowright"
-              color="white"
               type="antdesign"
+              color="white"
             />
           </View>
         </TouchableOpacity>
@@ -56,4 +55,4 @@ const NavOptions = () => {
   );
 };
 
-export default NavOptions;
+export default RideOrFoodNav;

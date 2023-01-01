@@ -1,55 +1,94 @@
-import { StatusBar } from "expo-status-bar";
-import { KeyboardAvoidingView, Platform } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
-import HomeScreen from "./screens/HomeScreen";
-import { store } from "./store";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MapScreen from "./screens/MapScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { View, ActivityIndicator } from "react-native";
+import { onAuthStateChanged } from "firebase/auth";
+import { Provider } from "react-redux";
+import { auth } from "./config/firebase";
+import Login from "./screens/Login";
+import Signup from "./screens/Signup";
+import Chat from "./screens/Chat";
+import Home from "./screens/Home";
+import { store } from "./store";
+import RideScreen from "./screens/RideScreen";
 import EatsScreen from "./screens/EatsScreen";
-import tw from "tailwind-react-native-classnames";
 
-// Setup Redux
-export default function App() {
-  const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
+const AuthenticatedUserContext = createContext({});
 
+const AuthenticatedUserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  return (
+    <AuthenticatedUserContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthenticatedUserContext.Provider>
+  );
+};
+
+function ChatStack() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <SafeAreaProvider>
-          <KeyboardAvoidingView
-            //we have to use platform because the way it work in IOS and Androis is diffrent
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
-            style={tw`flex-1`}
-          >
-            <Stack.Navigator>
-              <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="MapScreen"
-                component={MapScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="EatsScreen"
-                component={EatsScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Stack.Navigator>
-          </KeyboardAvoidingView>
-        </SafeAreaProvider>
-      </NavigationContainer>
+      <Stack.Navigator defaultScreenOptions={{ Home }}>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen
+          name="RideScreen"
+          component={RideScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="EatsScreen" component={EatsScreen} />
+      </Stack.Navigator>
     </Provider>
+  );
+}
+
+function AuthStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Signup" component={Signup} />
+    </Stack.Navigator>
+  );
+}
+
+function RootNavigator() {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // onAuthStateChanged returns an unsubscriber
+    const unsubscribeAuth = onAuthStateChanged(
+      auth,
+      async (authenticatedUser) => {
+        authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+        setIsLoading(false);
+      }
+    );
+    // unsubscribe auth listener on unmount
+    return unsubscribeAuth;
+  }, [user]);
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  return (
+    <NavigationContainer>
+      {user ? <ChatStack /> : <AuthStack />}
+    </NavigationContainer>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthenticatedUserProvider>
+      <RootNavigator />
+    </AuthenticatedUserProvider>
   );
 }
