@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, ActivityIndicator } from "react-native";
 import { onAuthStateChanged } from "firebase/auth";
+//import { onAuthStateChanged } from "firebase/app";
 import { Provider } from "react-redux";
 import { auth } from "./config/firebase";
 import Login from "./screens/Login";
@@ -12,6 +13,8 @@ import Home from "./screens/Home";
 import { store } from "./store";
 import RideScreen from "./screens/RideScreen";
 import EatsScreen from "./screens/EatsScreen";
+import Otp from "./screens/Otp";
+import WelcomeScreen from "./screens/Welcome";
 
 const Stack = createStackNavigator();
 const AuthenticatedUserContext = createContext({});
@@ -51,6 +54,8 @@ function AuthStack() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Otp" component={Otp} />
+      <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
     </Stack.Navigator>
   );
 }

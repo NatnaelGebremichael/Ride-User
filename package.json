@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "expo": "~47.0.9",
     "expo-constants": "~14.0.2",
+    "expo-firebase-recaptcha": "~2.3.1",
     "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.15.0",
@@ -32,6 +33,7 @@
     "react-native-maps-directions": "^1.9.0",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
+    "react-native-webview": "^11.26.0",
     "react-redux": "^8.0.5",
     "twrnc": "^3.5.0"
   },

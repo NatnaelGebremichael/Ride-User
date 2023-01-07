@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,10 +10,11 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
 import { auth } from "../config/firebase";
-const backImage = require("../assets/backImage.png");
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
+const backImage = require("../assets/backImage.png");
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
