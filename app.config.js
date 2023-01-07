@@ -2,8 +2,8 @@ import "dotenv/config";
 
 export default {
   expo: {
-    name: "Chatapp-Tutorial",
-    slug: "Chatapp-Tutorial",
+    name: "Fetan",
+    slug: "Fetan",
     version: "1.0.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
