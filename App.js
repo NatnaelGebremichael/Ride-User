@@ -28,7 +28,7 @@ const AuthenticatedUserProvider = ({ children }) => {
   );
 };
 
-function ChatStack() {
+function AppStack() {
   return (
     <Provider store={store}>
       <Stack.Navigator defaultScreenOptions={{ Home }}>
@@ -85,7 +85,7 @@ function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {user ? <ChatStack /> : <AuthStack />}
+      {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
