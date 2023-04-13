@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/masked-view": "^0.1.11",
-    "@react-navigation/native": "^6.1.1",
+    "@react-navigation/native": "^6.1.2",
     "@react-navigation/stack": "^6.3.10",
     "@reduxjs/toolkit": "^1.9.1",
     "@rneui/base": "^4.0.0-rc.7",
@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "expo": "~47.0.9",
     "expo-constants": "~14.0.2",
+    "expo-firebase-recaptcha": "~2.3.1",
     "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.15.0",
@@ -32,6 +33,7 @@
     "react-native-maps-directions": "^1.9.0",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
+    "react-native-webview": "^11.26.0",
     "react-redux": "^8.0.5",
     "twrnc": "^3.5.0"
   },

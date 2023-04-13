@@ -11,8 +11,8 @@ import {
   Alert,
 } from "react-native";
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const backImage = require("../assets/backImage.png");
 
@@ -74,6 +74,12 @@ export default function Login({ navigation }) {
             <Text style={{ color: "#f57c00", fontWeight: "600", fontSize: 14 }}>
               {" "}
               Sign Up
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Otp")}>
+            <Text style={{ color: "#f57c00", fontWeight: "600", fontSize: 14 }}>
+              {" "}
+              Otp
             </Text>
           </TouchableOpacity>
         </View>
